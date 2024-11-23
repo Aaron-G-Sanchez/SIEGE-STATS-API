@@ -2,6 +2,8 @@ import { readFile } from 'fs/promises'
 import { JSDOM } from 'jsdom'
 import path from 'path'
 
+import { getUsername } from '../src/scrape-commands'
+
 describe('HTML response scrape test', () => {
   let dom: JSDOM
 
@@ -14,10 +16,7 @@ describe('HTML response scrape test', () => {
   })
 
   test('should return the username', () => {
-    // TODO: Replace with function that will actually search for the username.
-    let username = dom.window.document.querySelector(
-      'span.fit-long-username'
-    )?.textContent
+    let username = getUsername(dom)
 
     expect(username).toBe('TEST_USERNAME')
   })
